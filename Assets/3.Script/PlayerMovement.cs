@@ -7,7 +7,9 @@ public class PlayerMovement : MonoBehaviour
 {
     private GameObject playerObject;
     private Rigidbody2D rigidbody2d;
+    private Animator playerBodyAnimator;
     private PlayerGroundCollider playerGroundCollider;
+    
 
     private float moveSpeed = 1.0f;
     private float jumpPower = 3.0f;
@@ -17,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
         playerObject = this.gameObject;
         rigidbody2d = playerObject.GetComponent<Rigidbody2D>();
         playerGroundCollider = playerObject.transform.Find("GroundCollider").GetComponent<PlayerGroundCollider>();
-
+        playerBodyAnimator = playerObject.transform.Find("BodyGraphics").GetComponent<Animator>();
     }
 
     void Update()
@@ -27,15 +29,26 @@ public class PlayerMovement : MonoBehaviour
             Move();
             Jump();
         }
+        else
+        {
+            NoMove();
+        }
     }
 
     private void Move()
     {
         Vector3 arrow = Vector3.zero;
         if (Input.GetKey(KeyCode.LeftArrow)) arrow += Vector3.left;
-        if (Input.GetKey(KeyCode.RightArrow)) arrow += Vector3.right;
+        else if (Input.GetKey(KeyCode.RightArrow)) arrow += Vector3.right;
+        else NoMove();
         arrow = arrow.normalized * moveSpeed * Time.deltaTime;
         playerObject.transform.Translate(arrow, Space.World);
+        playerBodyAnimator.SetBool("isRunning", true);
+    }
+
+    private void NoMove()
+    {
+        playerBodyAnimator.SetBool("isRunning", false);
     }
 
     private void Jump()
