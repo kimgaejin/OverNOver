@@ -43,6 +43,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background wall
+    uniqueID: 788980999
+    locked: 0
+  - name: Background object
+    uniqueID: 204207879
+    locked: 0
+  - name: Background effects
+    uniqueID: 3177931743
+    locked: 0
   - name: PlayerBody
     uniqueID: 2074524999
     locked: 0
