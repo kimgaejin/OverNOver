@@ -9,10 +9,12 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rigidbody2d;
     private Animator playerBodyAnimator;
     private PlayerGroundCollider playerGroundCollider;
-    
 
     private float moveSpeed = 1.0f;
     private float jumpPower = 3.0f;
+
+    private UnityEngine.Quaternion leftFace;
+    private UnityEngine.Quaternion rightFace;
 
     private void Start()
     {
@@ -20,6 +22,9 @@ public class PlayerMovement : MonoBehaviour
         rigidbody2d = playerObject.GetComponent<Rigidbody2D>();
         playerGroundCollider = playerObject.transform.Find("GroundCollider").GetComponent<PlayerGroundCollider>();
         playerBodyAnimator = playerObject.transform.Find("BodyGraphics").GetComponent<Animator>();
+
+        leftFace.eulerAngles = new Vector3(0, -180, 0);
+        rightFace.eulerAngles = new Vector3(0, 0, 0);
     }
 
     void Update()
@@ -27,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.anyKey)
         {
             Move();
+            Rotate();
             Jump();
         }
         else
@@ -40,7 +46,11 @@ public class PlayerMovement : MonoBehaviour
         Vector3 arrow = Vector3.zero;
         if (Input.GetKey(KeyCode.LeftArrow)) arrow += Vector3.left;
         else if (Input.GetKey(KeyCode.RightArrow)) arrow += Vector3.right;
-        else NoMove();
+        else
+        {
+            NoMove();
+            return;
+        }
         arrow = arrow.normalized * moveSpeed * Time.deltaTime;
         playerObject.transform.Translate(arrow, Space.World);
         playerBodyAnimator.SetBool("isRunning", true);
@@ -59,5 +69,12 @@ public class PlayerMovement : MonoBehaviour
         if (isGround == false) return;
 
         rigidbody2d.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+    }
+
+    private void Rotate()
+    {
+
+        if (Input.GetKey(KeyCode.LeftArrow)) playerObject.transform.rotation = leftFace;
+        else if (Input.GetKey(KeyCode.RightArrow)) playerObject.transform.rotation = rightFace;
     }
 }
