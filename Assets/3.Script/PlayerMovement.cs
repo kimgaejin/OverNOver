@@ -10,8 +10,8 @@ public class PlayerMovement : MonoBehaviour
     private Animator playerBodyAnimator;
     private PlayerGroundCollider playerGroundCollider;
 
-    private float moveSpeed = 1.0f;
-    private float jumpPower = 3.0f;
+    private float moveSpeed = 2.0f;
+    private float jumpPower = 4.0f;
 
     private UnityEngine.Quaternion leftFace;
     private UnityEngine.Quaternion rightFace;
