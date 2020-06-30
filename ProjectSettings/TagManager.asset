@@ -43,3 +43,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: PlayerBody
+    uniqueID: 2074524999
+    locked: 0
+  - name: PlayerSword
+    uniqueID: 3488593371
+    locked: 0
+  - name: PlayerEffects
+    uniqueID: 3517247817
+    locked: 0

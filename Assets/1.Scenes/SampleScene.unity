@@ -390,7 +390,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &577867328
 Transform:
   m_ObjectHideFlags: 0
@@ -502,12 +502,12 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -777719479
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 1957107745717523172, guid: dd45a83fbe6d05744bdc6f64e0578dd0,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5058824}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -693,12 +693,12 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -777719479
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -3914910146244942373, guid: dd45a83fbe6d05744bdc6f64e0578dd0,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5058824}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -717,6 +717,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1092185637}
+  - component: {fileID: 1092185638}
   m_Layer: 0
   m_Name: SwordGraphics
   m_TagString: Untagged
@@ -740,6 +741,25 @@ Transform:
   m_Father: {fileID: 2075872008}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1092185638
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092185636}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ebbe023bec23614448bcb8c12d849bfd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1102138716
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,8 +827,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -806373925
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 4214452682036070143, guid: c6dbcf0c6238a164f82558429fef7cf1,
     type: 3}
@@ -1120,12 +1140,12 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -777719479
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 6609894105642088411, guid: dd45a83fbe6d05744bdc6f64e0578dd0,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5058824}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1145,6 +1165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2075872008}
   - component: {fileID: 2075872011}
+  - component: {fileID: 2075872012}
   - component: {fileID: 2075872010}
   - component: {fileID: 2075872009}
   m_Layer: 0
@@ -1228,5 +1249,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a199a11f0667e06428ed61e466d91221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2075872012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2075872007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b542985702f4f84e9199ed7c668c33c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
