@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -38,6 +39,21 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             NoMove();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // attacked 효과를 실험해보기 위한 임시 스크립트
+        if (collision.tag == "enemyAttack")
+        {
+            Transform enenmyTransform = collision.transform.parent.parent;
+            MonsterCommon monster = enenmyTransform.GetComponent<MonsterCommon>();
+            List <SkillEffect> monsterSkills = monster.GetSkillEffects().ToList<SkillEffect>();
+            foreach (SkillEffect skill in monsterSkills)
+            {
+                skill.Do(this.gameObject);
+            }
         }
     }
 

@@ -9,6 +9,7 @@ public class SkullWarrior : MonsterCommon
     {
         Init();
         Property("SkullWarrior", 100.0f, 2.0f, 0.5f);
+        skillEffects.Add(new KnockBack(this.gameObject, 3.0f));
     }
 
     // Update is called once per frame
@@ -20,7 +21,6 @@ public class SkullWarrior : MonsterCommon
     protected override void AttackPre()
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        Debug.Log("attackPreing");
 
         if (stateInfo.IsName(monsterName + "_attackPre") && 0.99f <= stateInfo.normalizedTime)
         {

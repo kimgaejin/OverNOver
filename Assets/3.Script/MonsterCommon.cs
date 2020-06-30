@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class MonsterCommon : MonoBehaviour
 {
-    // 
-    protected string monsterName;
+    protected enum State { DEFAULT, SEARCHING, CHASING, ATTACKPRE, ATTACKING, ATTACKED, DEAD };
 
-    //
+    // refers
     protected GameObject player;
     protected Vector3 targetPosition;
-    protected enum State { DEFAULT, SEARCHING, CHASING, ATTACKPRE, ATTACKING, ATTACKED, DEAD };
     protected Rigidbody2D rigid;
     protected Animator animator;
     protected Collider2D searchRange;
-    protected State state;
+
+    // property
+    protected string monsterName;
     protected float hp;
     protected float speed = 2.0f;
     protected float attackRange = 1.0f;
+    protected List<SkillEffect> skillEffects;
 
+    // states
+    protected State state;
     protected float curTimer;
     protected float recTimer;
 
+    // const
     protected Quaternion leftFace;
     protected Quaternion rightFace; // 기본
 
@@ -41,6 +45,8 @@ public class MonsterCommon : MonoBehaviour
         hp = _hp;
         speed = _speed;
         attackRange = _attackRange;
+
+        skillEffects = new List<SkillEffect>();
     }
 
     protected virtual void Routine()
@@ -146,5 +152,10 @@ public class MonsterCommon : MonoBehaviour
         if (!player) return;
         if (player.transform.position.x >= this.transform.position.x) this.transform.rotation = rightFace;
         else this.transform.rotation = leftFace;
+    }
+
+    public List<SkillEffect> GetSkillEffects()
+    {
+        return skillEffects;
     }
 }

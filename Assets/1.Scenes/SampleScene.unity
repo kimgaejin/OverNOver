@@ -791,7 +791,7 @@ GameObject:
   - component: {fileID: 598923469}
   m_Layer: 0
   m_Name: attackEffect
-  m_TagString: Untagged
+  m_TagString: enemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
