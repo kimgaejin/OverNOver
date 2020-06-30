@@ -10,11 +10,13 @@ public class MonsterCommon : MonoBehaviour
     //
     protected GameObject player;
     protected enum State { DEFAULT, SEARCHING, CHASING, ATTACKPRE, ATTACKING, ATTACKED, DEAD };
+    protected Rigidbody2D rigid;
     protected Animator animator;
     protected Collider2D searchRange;
     protected State state;
     protected float hp;
     protected float speed = 2.0f;
+    protected float attackRange = 1.0f;
 
     protected float curTimer;
     protected float recTimer; 
@@ -23,6 +25,15 @@ public class MonsterCommon : MonoBehaviour
     {
         searchRange = this.gameObject.transform.Find("SearchRange").GetComponent<Collider2D>();
         animator = this.gameObject.transform.Find("Graphics").GetComponent<Animator>();
+        rigid = this.gameObject.GetComponent<Rigidbody2D>();
+    }
+
+    protected virtual void Property(string _monsterName, float _hp, float _speed, float _attackRange)
+    {
+        monsterName = _monsterName;
+        hp = _hp;
+        speed = _speed;
+        attackRange = _attackRange;
     }
 
     protected virtual void Routine()
@@ -89,8 +100,7 @@ public class MonsterCommon : MonoBehaviour
         arrow = arrow.normalized;
         
         this.transform.Translate(arrow * speed * Time.deltaTime, Space.World);
-        Debug.Log("chasing " + (player.transform.position - this.transform.position).magnitude.ToString());
-        if ((player.transform.position - this.transform.position).magnitude < 2.0f)
+        if (Mathf.Abs(player.transform.position.x - this.transform.position.x) < attackRange)
         {
             state = State.ATTACKPRE;
             animator.SetBool("attackPre", true);
@@ -100,7 +110,6 @@ public class MonsterCommon : MonoBehaviour
     protected virtual void AttackPre()
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        Debug.Log("attackPreing");
 
         if (stateInfo.IsName(monsterName + "_attackPre") && 0.99f <= stateInfo.normalizedTime)
         {
