@@ -9,6 +9,7 @@ public class MonsterCommon : MonoBehaviour
 
     //
     protected GameObject player;
+    protected Vector3 targetPosition;
     protected enum State { DEFAULT, SEARCHING, CHASING, ATTACKPRE, ATTACKING, ATTACKED, DEAD };
     protected Rigidbody2D rigid;
     protected Animator animator;
@@ -19,10 +20,16 @@ public class MonsterCommon : MonoBehaviour
     protected float attackRange = 1.0f;
 
     protected float curTimer;
-    protected float recTimer; 
+    protected float recTimer;
+
+    protected Quaternion leftFace;
+    protected Quaternion rightFace; // 기본
 
     protected virtual void Init()
     {
+        rightFace = Quaternion.Euler(0, 0, 0);
+        leftFace = Quaternion.Euler(0, -180, 0);
+
         searchRange = this.gameObject.transform.Find("SearchRange").GetComponent<Collider2D>();
         animator = this.gameObject.transform.Find("Graphics").GetComponent<Animator>();
         rigid = this.gameObject.GetComponent<Rigidbody2D>();
@@ -52,6 +59,7 @@ public class MonsterCommon : MonoBehaviour
         else if (state == State.CHASING)
         {
             ChasePlayer();
+            Rotate();
         }
         else if (state == State.ATTACKPRE)
         {
@@ -104,11 +112,13 @@ public class MonsterCommon : MonoBehaviour
         {
             state = State.ATTACKPRE;
             animator.SetBool("attackPre", true);
+            targetPosition = player.transform.position;
         }
     }
 
     protected virtual void AttackPre()
     {
+        Rotate();
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         if (stateInfo.IsName(monsterName + "_attackPre") && 0.99f <= stateInfo.normalizedTime)
@@ -129,5 +139,12 @@ public class MonsterCommon : MonoBehaviour
             state = State.CHASING;
             animator.SetBool("attack", false);
         }
+    }
+
+    protected virtual void Rotate()
+    {
+        if (!player) return;
+        if (player.transform.position.x >= this.transform.position.x) this.transform.rotation = rightFace;
+        else this.transform.rotation = leftFace;
     }
 }

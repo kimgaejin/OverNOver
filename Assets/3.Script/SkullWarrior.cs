@@ -28,10 +28,9 @@ public class SkullWarrior : MonsterCommon
             animator.SetBool("attackPre", false);
             animator.SetBool("attack", true);
 
-            // 플레이어를 향해 대쉬
-            Vector2 distance = (Vector2)(player.transform.position - this.transform.position).normalized;
+            // 플레이어가 있던 장소를 향해 대쉬
+            Vector2 distance = new Vector2(targetPosition.x - this.transform.position.x, 0).normalized;
             rigid.AddForce(distance * speed * speed, ForceMode2D.Impulse);
         }
-
     }
 }
