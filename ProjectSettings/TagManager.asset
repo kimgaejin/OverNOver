@@ -8,6 +8,7 @@ TagManager:
   - object
   - enemyAttack
   - enemy
+  - jumpGround
   layers:
   - Default
   - TransparentFX

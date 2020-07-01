@@ -14,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
 
     private float moveSpeed = 2.0f;
     private float jumpPower = 4.0f;
-    private bool isOnEnemy;
 
     private UnityEngine.Quaternion leftFace;
     private UnityEngine.Quaternion rightFace;
@@ -95,10 +94,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlusJump()
     {
-        if (isOnEnemy)
+        if (playerGroundCollider.GetIsJumpGround() && rigidbody2d.velocity.y < 0.01f)
         {
             rigidbody2d.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-            isOnEnemy = false;
         }
     }
 
@@ -108,9 +106,4 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKey(KeyCode.RightArrow)) playerObject.transform.rotation = rightFace;
     }
 
-    public void IsOnEnemy()
-    {
-        if (rigidbody2d.velocity.y < 0.01f)
-            isOnEnemy = true;
-    }
 }
