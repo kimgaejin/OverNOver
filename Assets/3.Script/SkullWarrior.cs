@@ -30,7 +30,7 @@ public class SkullWarrior : MonsterCommon
 
             // 플레이어가 있던 장소를 향해 대쉬
             Vector2 distance = new Vector2(targetPosition.x - this.transform.position.x, 0).normalized;
-            rigid.AddForce(distance * speed * speed, ForceMode2D.Impulse);
+            rigid.AddForce(distance * speed * 1, ForceMode2D.Impulse);
         }
     }
 }
