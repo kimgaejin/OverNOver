@@ -52,7 +52,6 @@ public class MonsterCommon : MonoBehaviour
     protected virtual void Routine()
     {
         curTimer += Time.deltaTime;
-        Debug.Log("Cur State: " + state.ToString());
 
         if (state == State.DEFAULT)
         {

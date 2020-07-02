@@ -8,6 +8,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private GameObject playerObject;
+    private Player playerScript;
     private Rigidbody2D rigidbody2d;
     private Animator playerBodyAnimator;
     private PlayerGroundCollider playerGroundCollider;
@@ -15,20 +16,20 @@ public class PlayerMovement : MonoBehaviour
     private float moveSpeed = 2.0f;
     private float jumpPower = 4.0f;
 
-    private UnityEngine.Quaternion leftFace;
-    private UnityEngine.Quaternion rightFace;
+    private bool isRightFace = true;
 
-    private void Start()
+    public void Init()
     {
+        // execute in Player.cs
+
         playerObject = this.gameObject;
         rigidbody2d = playerObject.GetComponent<Rigidbody2D>();
+        playerScript = playerObject.GetComponent<Player>();
         playerGroundCollider = playerObject.transform.Find("GroundCollider").GetComponent<PlayerGroundCollider>();
         playerBodyAnimator = playerObject.transform.Find("BodyGraphics").GetComponent<Animator>();
 
         playerGroundCollider.SetPlayerMovement(this.GetComponent<PlayerMovement>());
 
-        leftFace.eulerAngles = new Vector3(0, -180, 0);
-        rightFace.eulerAngles = new Vector3(0, 0, 0);
     }
 
     void Update()
@@ -53,30 +54,37 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move()
     {
+        // Player Jump
         if (Input.GetKeyDown(KeyCode.S) && Jump())
         {
 
         }
 
+        // Player Move
         Vector3 arrow = Vector3.zero;
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             arrow += Vector3.left;
-            playerObject.transform.rotation = leftFace;
+            isRightFace = false;
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             arrow += Vector3.right;
-            playerObject.transform.rotation = rightFace;
+            isRightFace = true;
         }
         else
         {
             NoMove();
             return;
         }
+
         arrow = arrow.normalized * moveSpeed * Time.deltaTime;
         playerObject.transform.Translate(arrow, Space.World);
         playerBodyAnimator.SetBool("isRunning", true);
+
+        // Player Flip
+        playerScript.FlipToRight(isRightFace);
+
     }
 
     private void NoMove()
@@ -101,5 +109,11 @@ public class PlayerMovement : MonoBehaviour
             rigidbody2d.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         }
     }
+
+    public bool IsRightFace()
+    {
+        return isRightFace;
+    }
+
 
 }

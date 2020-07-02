@@ -6,18 +6,29 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Player playerScript;
-    private GameObject playerGameObject;
+    private GameObject playerObject;
     private PlayerMovement playerMovement;
     private PlayerAttack playerAttack;
 
     private enum State { DEFAULT, RUN, ATTACKING, ATTACKED };
     private State curState;
 
+    private UnityEngine.Quaternion leftFace;
+    private UnityEngine.Quaternion rightFace;
+
+
     private void Awake()
     {
-        playerGameObject = this.gameObject;
-        playerMovement = playerGameObject.GetComponent<PlayerMovement>();
-        playerAttack = playerGameObject.GetComponent<PlayerAttack>();
+        playerObject = this.gameObject;
+        playerScript = playerObject.GetComponent<Player>();
+        playerMovement = playerObject.GetComponent<PlayerMovement>();
+        playerAttack = playerObject.GetComponent<PlayerAttack>();
+
+        leftFace.eulerAngles = new Vector3(0, -180, 0);
+        rightFace.eulerAngles = new Vector3(0, 0, 0);
+
+        playerMovement.Init();
+        playerAttack.Init();
     }
 
     private void Update()
@@ -30,7 +41,7 @@ public class Player : MonoBehaviour
         else if (curState == State.RUN)
         {
             playerMovement.Move();
-            if (playerAttack.IsAttackStarting())
+            if (playerAttack.IsAttackStarting(playerMovement.IsRightFace()))
             {
                 curState = State.ATTACKING;
             }
@@ -52,5 +63,12 @@ public class Player : MonoBehaviour
         }
 
     }
+
+    public void FlipToRight(bool isFaceRight)
+    {
+        if (isFaceRight == true) playerObject.transform.rotation = rightFace;
+        else playerObject.transform.rotation = leftFace;
+    }
+
 
 }
