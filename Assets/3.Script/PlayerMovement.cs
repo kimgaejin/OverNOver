@@ -33,17 +33,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.anyKey)
-        {
-            Move();
-            Rotate();
-            Jump();
-        }
-        else
-        {
-            NoMove();
-        }
-
         PlusJump();
     }
 
@@ -62,11 +51,24 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Move()
+    public void Move()
     {
+        if (Input.GetKeyDown(KeyCode.S) && Jump())
+        {
+
+        }
+
         Vector3 arrow = Vector3.zero;
-        if (Input.GetKey(KeyCode.LeftArrow)) arrow += Vector3.left;
-        else if (Input.GetKey(KeyCode.RightArrow)) arrow += Vector3.right;
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            arrow += Vector3.left;
+            playerObject.transform.rotation = leftFace;
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            arrow += Vector3.right;
+            playerObject.transform.rotation = rightFace;
+        }
         else
         {
             NoMove();
@@ -82,14 +84,14 @@ public class PlayerMovement : MonoBehaviour
         playerBodyAnimator.SetBool("isRunning", false);
     }
 
-    private void Jump()
+    public bool Jump()
     {
-        if (!Input.GetKeyDown(KeyCode.S)) return;
-
         bool isGround = rigidbody2d.velocity.y <= 0.01f && playerGroundCollider.GetIsGround() == true;
-        if (isGround == false) return;
+        if (isGround == false) return false;
 
         rigidbody2d.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+
+        return true;
     }
 
     private void PlusJump()
@@ -98,12 +100,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rigidbody2d.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         }
-    }
-
-    private void Rotate()
-    {
-        if (Input.GetKey(KeyCode.LeftArrow)) playerObject.transform.rotation = leftFace;
-        else if (Input.GetKey(KeyCode.RightArrow)) playerObject.transform.rotation = rightFace;
     }
 
 }
