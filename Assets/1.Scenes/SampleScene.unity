@@ -1387,7 +1387,7 @@ GameObject:
   - component: {fileID: 606900121}
   m_Layer: 0
   m_Name: effects_1
-  m_TagString: Untagged
+  m_TagString: playerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2241,7 +2241,7 @@ GameObject:
   - component: {fileID: 1023577416}
   m_Layer: 0
   m_Name: effects_2
-  m_TagString: Untagged
+  m_TagString: playerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2589,6 +2589,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1200315167}
   - component: {fileID: 1200315170}
+  - component: {fileID: 1200315171}
   - component: {fileID: 1200315169}
   - component: {fileID: 1200315168}
   m_Layer: 0
@@ -2674,6 +2675,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd6b8b03a115ba4d8192d88b69ea6a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1200315171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200315166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c6d31c5fb16fd448e4aa25c373eb8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 0
 --- !u!1 &1211819340
 GameObject:
   m_ObjectHideFlags: 0
@@ -3032,6 +3046,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1451184589}
   - component: {fileID: 1451184592}
+  - component: {fileID: 1451184593}
   - component: {fileID: 1451184591}
   - component: {fileID: 1451184590}
   m_Layer: 0
@@ -3117,6 +3132,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd6b8b03a115ba4d8192d88b69ea6a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1451184593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451184588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c6d31c5fb16fd448e4aa25c373eb8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 0
 --- !u!1 &1619644321
 GameObject:
   m_ObjectHideFlags: 0
@@ -3585,7 +3613,7 @@ GameObject:
   - component: {fileID: 2057309503}
   m_Layer: 0
   m_Name: effects_0
-  m_TagString: Untagged
+  m_TagString: playerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

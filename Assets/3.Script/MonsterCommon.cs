@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterCommon : MonoBehaviour
+public class MonsterCommon : CharacterCommon
 {
     protected enum State { DEFAULT, SEARCHING, CHASING, ATTACKPRE, ATTACKING, ATTACKED, DEAD };
 
@@ -32,6 +32,8 @@ public class MonsterCommon : MonoBehaviour
 
     protected virtual void Init()
     {
+        base.Init();
+
         rightFace = Quaternion.Euler(0, 0, 0);
         leftFace = Quaternion.Euler(0, -180, 0);
 
@@ -116,9 +118,15 @@ public class MonsterCommon : MonoBehaviour
         this.transform.Translate(arrow * speed * Time.deltaTime, Space.World);
         if (Mathf.Abs(player.transform.position.x - this.transform.position.x) < attackRange)
         {
-            state = State.ATTACKPRE;
-            animator.SetBool("attackPre", true);
-            targetPosition = player.transform.position;
+            // 사정거리 내에 진입하더라도, 해당 프레임에 50% 확률로 플레이어를 공격하지 않는다.
+            // 이를 통해 동시에 접근한 몬스터들이 텀을 둬서 시간차로 공격하는 것을 노립니다.
+            float r = Random.value;
+            if (0.5f <= r)
+            {
+                state = State.ATTACKPRE;
+                animator.SetBool("attackPre", true);
+                targetPosition = player.transform.position;
+            }
         }
     }
 

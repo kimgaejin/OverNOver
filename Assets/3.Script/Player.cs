@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnityEditor.Profiling.Memory.Experimental;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : CharacterCommon
 {
     private Player playerScript;
     private GameObject playerObject;
@@ -22,6 +23,13 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        Init();
+    }
+
+    protected override void Init()
+    {
+        base.Init();
+
         playerObject = this.gameObject;
         playerScript = playerObject.GetComponent<Player>();
         playerMovement = playerObject.GetComponent<PlayerMovement>();
@@ -33,7 +41,7 @@ public class Player : MonoBehaviour
 
         playerMovement.Init();
         playerAttack.Init();
-        playerHealth.Init(playerObject, playerScript, 100);
+        playerHealth.Init(playerObject, 100, "BodyGraphics", new string[] { "enemyAttack" });
     }
 
     private void Update()

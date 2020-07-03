@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class SkullWarrior : MonsterCommon
 {
-    // Start is called before the first frame update
     void Start()
     {
         Init();
+    
+    }
+
+    protected override void Init()
+    {
+        base.Init();
+
         Property("SkullWarrior", 100.0f, 2.0f, 0.5f);
         skillEffects.Add(new KnockBack(this.gameObject, 3.0f));
         skillEffects.Add(new Damage(25.0f));
+        health.Init(this.gameObject, 100, "Graphics", new string[] { "playerAttack" });
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         Routine();

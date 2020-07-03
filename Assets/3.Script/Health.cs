@@ -6,30 +6,35 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    private GameObject playerObject;
-    private Player playerScript;
-    private List<SpriteRenderer> playerBodyGraphics;
+    private GameObject targetObject;
+    private List<SpriteRenderer> bodySprites;
+    private List<string> interactTag;
 
     public float hp;
     private bool isDamaged;
 
-    public void Init(GameObject pObj, Player pSct,  float _hp)
+    public void Init(GameObject pObj,  float _hp, string graphicsName, string [] interactType)
     {
-        playerObject = pObj;
-        playerScript = pSct;
+        targetObject = pObj;
         hp = _hp;
 
-        playerBodyGraphics = new List<SpriteRenderer>();
-        Transform body = playerObject.transform.Find("BodyGraphics");
+        bodySprites = new List<SpriteRenderer>();
+        Transform body = targetObject.transform.Find(graphicsName);
         foreach (Transform part in body)
         {
-            playerBodyGraphics.Add(part.GetComponent<SpriteRenderer>());
+            bodySprites.Add(part.GetComponent<SpriteRenderer>());
+        }
+
+        interactTag = new List<string>();
+        foreach (string type in interactType)
+        {
+            interactTag.Add(type);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "enemyAttack")
+        if (interactTag.Contains(collision.tag))
         {
             if (!isDamaged)
             {
@@ -79,7 +84,7 @@ public class Health : MonoBehaviour
 
     private void SetColors(Color color)
     {
-        foreach (SpriteRenderer spr in playerBodyGraphics)
+        foreach (SpriteRenderer spr in bodySprites)
         {
             spr.color = color;
         }
