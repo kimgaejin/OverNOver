@@ -37,21 +37,6 @@ public class PlayerMovement : MonoBehaviour
         PlusJump();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // attacked 효과를 실험해보기 위한 임시 스크립트
-        if (collision.tag == "enemyAttack")
-        {
-            Transform enenmyTransform = collision.transform.parent.parent;
-            MonsterCommon monster = enenmyTransform.GetComponent<MonsterCommon>();
-            List <SkillEffect> monsterSkills = monster.GetSkillEffects().ToList<SkillEffect>();
-            foreach (SkillEffect skill in monsterSkills)
-            {
-                skill.Do(this.gameObject);
-            }
-        }
-    }
-
     public void Move()
     {
         // Player Jump

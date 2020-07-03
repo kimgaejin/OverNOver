@@ -18,6 +18,7 @@ public class MonsterCommon : MonoBehaviour
     protected float hp;
     protected float speed = 2.0f;
     protected float attackRange = 1.0f;
+    protected float damage;
     protected List<SkillEffect> skillEffects;
 
     // states
