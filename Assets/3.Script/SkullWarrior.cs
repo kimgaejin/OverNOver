@@ -10,6 +10,7 @@ public class SkullWarrior : MonsterCommon
         Init();
         Property("SkullWarrior", 100.0f, 2.0f, 0.5f);
         skillEffects.Add(new KnockBack(this.gameObject, 3.0f));
+        skillEffects.Add(new Damage(25.0f));
     }
 
     // Update is called once per frame

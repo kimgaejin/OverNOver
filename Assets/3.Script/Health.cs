@@ -33,9 +33,6 @@ public class Health : MonoBehaviour
         {
             if (!isDamaged)
             {
-                // 데미지
-                StartCoroutine(CDamaged());
-
                 // 군중제어
                 Transform enenmyTransform = collision.transform.parent.parent;
                 MonsterCommon monster = enenmyTransform.GetComponent<MonsterCommon>();
@@ -47,6 +44,21 @@ public class Health : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void Damaged(float damage)
+    {
+        // Damage로 인해 hp가 낮아지는 경우 호출하는 함수
+        // Damage의 SkillEffect.Do() 에서 호출하며
+        // 무적시간 자체는 데미지를 입었을 경우에만 삽입한다.
+        hp -= damage;
+        StartCoroutine(CDamaged());
+    }
+
+    public void DamagedWithoutInvincibility(float damage)
+    {
+        // 무적시간이 존재하지 않는 데미지
+        hp -= damage;
     }
 
     private IEnumerator CDamaged()

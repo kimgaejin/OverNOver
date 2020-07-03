@@ -12,7 +12,6 @@ public class SkillEffect
 public class KnockBack : SkillEffect
 {
     GameObject from;
-    GameObject target;
     float power;
 
     public KnockBack(GameObject from, float power)
@@ -35,5 +34,24 @@ public class KnockBack : SkillEffect
         dest.y = 0.5f;
 
         rigid.AddForce(dest * power, ForceMode2D.Impulse);
+    }
+}
+
+public class Damage : SkillEffect
+{
+    float damage;
+
+    public Damage(float damage)
+    {
+        this.damage = damage;
+    }
+
+    public override void Do(GameObject target)
+    {
+        Health targetHealth = target.GetComponent<Health>();
+        if (targetHealth)
+        {
+            targetHealth.Damaged(damage);
+        }
     }
 }
