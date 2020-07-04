@@ -73,17 +73,29 @@ public class MonsterCommon : CharacterCommon
         {
             Attacking();
         }
+        else if (state == State.ATTACKED)
+        {
+            float r = Random.value;
+            if (0.3f <= r)
+            {
+                state = State.CHASING;
+                animator.SetBool("attackFail", false);
+
+            }
+        }
         else if (state == State.DEAD)
         {
-
+            
         }
     }
 
-    protected virtual void attacked(float damage)
+
+    public override void Interrupt(string name)
     {
-        hp -= damage;
-        recTimer = curTimer;
-        if (0 <= hp) Dead();
+        if (name == "damaged")
+        {
+            AttackFail();
+        }
     }
 
     protected bool FindPlayer()
@@ -139,6 +151,7 @@ public class MonsterCommon : CharacterCommon
         if (stateInfo.IsName(monsterName + "_attackPre") && 0.99f <= stateInfo.normalizedTime)
         {
             state = State.ATTACKING;
+            animator.SetBool("attackFail", false);
             animator.SetBool("attackPre", false);
             animator.SetBool("attack", true);
         }
@@ -154,6 +167,14 @@ public class MonsterCommon : CharacterCommon
             state = State.CHASING;
             animator.SetBool("attack", false);
         }
+    }
+
+    protected virtual void AttackFail()
+    {
+        animator.SetBool("attackFail", true);
+        animator.SetBool("attack", false);
+        animator.SetBool("attackPre", false);
+        state = State.ATTACKED;
     }
 
     protected virtual void Rotate()
