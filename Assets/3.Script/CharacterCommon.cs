@@ -15,6 +15,11 @@ public class CharacterCommon : MonoBehaviour
         skillEffects = new List<SkillEffect>();
     }
 
+    public virtual void Dead()
+    {
+
+    }
+
     public List<SkillEffect> GetSkillEffects()
     {
         return skillEffects;

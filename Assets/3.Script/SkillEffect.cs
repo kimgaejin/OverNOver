@@ -40,10 +40,12 @@ public class KnockBack : SkillEffect
 public class Damage : SkillEffect
 {
     float damage;
+    bool invincibilityType;
 
-    public Damage(float damage)
+    public Damage(float damage, bool invincibilityType)
     {
         this.damage = damage;
+        this.invincibilityType = invincibilityType;
     }
 
     public override void Do(GameObject target)
@@ -51,7 +53,7 @@ public class Damage : SkillEffect
         Health targetHealth = target.GetComponent<Health>();
         if (targetHealth)
         {
-            targetHealth.Damaged(damage);
+            targetHealth.Damaged(damage, invincibilityType);
         }
     }
 }

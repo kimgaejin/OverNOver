@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
 using UnityEngine;
 
 public class MonsterCommon : CharacterCommon
@@ -74,12 +75,17 @@ public class MonsterCommon : CharacterCommon
         {
             Attacking();
         }
+        else if (state == State.DEAD)
+        {
+
+        }
     }
 
     protected virtual void attacked(float damage)
     {
         hp -= damage;
         recTimer = curTimer;
+        if (0 <= hp) Dead();
     }
 
     protected bool FindPlayer()
@@ -159,4 +165,8 @@ public class MonsterCommon : CharacterCommon
         else this.transform.rotation = leftFace;
     }
 
+    public override void Dead()
+    {
+        state = State.DEAD;
+    }
 }

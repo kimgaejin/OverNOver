@@ -29,7 +29,8 @@ public class Player : CharacterCommon
     protected override void Init()
     {
         base.Init();
-        skillEffects.Add(new Damage(10.0f));
+        skillEffects.Add(new Damage(10.0f, false));
+        skillEffects.Add(new KnockBack(this.gameObject, 1.0f));
 
         playerObject = this.gameObject;
         playerScript = playerObject.GetComponent<Player>();

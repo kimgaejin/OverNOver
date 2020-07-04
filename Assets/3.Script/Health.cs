@@ -7,6 +7,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     private GameObject targetObject;
+    private CharacterCommon characterCommon;
     private List<SpriteRenderer> bodySprites;
     private List<string> interactTag;
 
@@ -16,6 +17,7 @@ public class Health : MonoBehaviour
     public void Init(GameObject pObj,  float _hp, string graphicsName, string [] interactType)
     {
         targetObject = pObj;
+        characterCommon = targetObject.GetComponent<CharacterCommon>();
         hp = _hp;
 
         bodySprites = new List<SpriteRenderer>();
@@ -58,26 +60,26 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void Damaged(float damage)
+    public void Damaged(float damage, bool invincibilityType)
     {
         // Damage로 인해 hp가 낮아지는 경우 호출하는 함수
         // Damage의 SkillEffect.Do() 에서 호출하며
-        // 무적시간 자체는 데미지를 입었을 경우에만 삽입한다.
+        // 무적이 존재하는 공격의 경우 5틱 (1초)간 무적하고 아닐경우 1틱 (0.2초)만 무적 상태
+
         hp -= damage;
-        StartCoroutine(CDamaged());
+        if (invincibilityType )
+            StartCoroutine(CDamaged(5));
+        else
+            StartCoroutine(CDamaged(1));
+
+        if (hp <= 0) characterCommon.Dead();
     }
 
-    public void DamagedWithoutInvincibility(float damage)
-    {
-        // 무적시간이 존재하지 않는 데미지
-        hp -= damage;
-    }
-
-    private IEnumerator CDamaged()
+    private IEnumerator CDamaged(int tick)
     {
         isDamaged = true;
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < tick; i++)
         {
             SetColors(Color.black);
             yield return new WaitForSeconds(.1f);
