@@ -39,11 +39,18 @@ public class Health : MonoBehaviour
             if (!isDamaged)
             {
                 // 군중제어
-                Transform enenmyTransform = collision.transform.parent.parent;
-                MonsterCommon monster = enenmyTransform.GetComponent<MonsterCommon>();
-                List<SkillEffect> monsterSkills = monster.GetSkillEffects().ToList<SkillEffect>();
+                Transform characterTransform = collision.transform;
+                CharacterCommon chara = characterTransform.GetComponent<CharacterCommon>();
 
-                foreach (SkillEffect skill in monsterSkills)
+                while (chara == null && characterTransform.parent != null)
+                {
+                    characterTransform = characterTransform.parent;
+                    chara = characterTransform.GetComponent<CharacterCommon>();
+                }
+                if (chara == null) return;
+
+                List<SkillEffect> skills = chara.GetSkillEffects();
+                foreach (SkillEffect skill in skills)
                 {
                     skill.Do(this.gameObject);
                 }

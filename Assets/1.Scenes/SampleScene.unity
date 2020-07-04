@@ -734,7 +734,7 @@ GameObject:
   - component: {fileID: 282596900}
   - component: {fileID: 282596902}
   - component: {fileID: 282596901}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: attackEffect
   m_TagString: enemyAttack
   m_Icon: {fileID: 0}
@@ -1241,13 +1241,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 577867328}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &577867328
 Transform:
   m_ObjectHideFlags: 0
@@ -1276,7 +1276,7 @@ GameObject:
   - component: {fileID: 598923467}
   - component: {fileID: 598923468}
   - component: {fileID: 598923469}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: attackEffect
   m_TagString: enemyAttack
   m_Icon: {fileID: 0}
@@ -1385,13 +1385,13 @@ GameObject:
   - component: {fileID: 606900120}
   - component: {fileID: 606900122}
   - component: {fileID: 606900121}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: effects_1
   m_TagString: playerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &606900120
 Transform:
   m_ObjectHideFlags: 0
@@ -2239,13 +2239,13 @@ GameObject:
   - component: {fileID: 1023577415}
   - component: {fileID: 1023577417}
   - component: {fileID: 1023577416}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: effects_2
   m_TagString: playerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1023577415
 Transform:
   m_ObjectHideFlags: 0
@@ -2592,7 +2592,7 @@ GameObject:
   - component: {fileID: 1200315171}
   - component: {fileID: 1200315169}
   - component: {fileID: 1200315168}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skull
   m_TagString: enemy
   m_Icon: {fileID: 0}
@@ -3049,7 +3049,7 @@ GameObject:
   - component: {fileID: 1451184593}
   - component: {fileID: 1451184591}
   - component: {fileID: 1451184590}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skull (1)
   m_TagString: enemy
   m_Icon: {fileID: 0}
@@ -3064,7 +3064,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451184588}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.46, y: -3.61, z: 0}
+  m_LocalPosition: {x: 20.23, y: -3.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1914561742}
@@ -3611,13 +3611,13 @@ GameObject:
   - component: {fileID: 2057309502}
   - component: {fileID: 2057309504}
   - component: {fileID: 2057309503}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: effects_0
   m_TagString: playerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2057309502
 Transform:
   m_ObjectHideFlags: 0
@@ -3808,7 +3808,7 @@ GameObject:
   - component: {fileID: 2075872014}
   - component: {fileID: 2075872010}
   - component: {fileID: 2075872009}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}

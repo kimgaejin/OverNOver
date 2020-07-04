@@ -29,6 +29,7 @@ public class Player : CharacterCommon
     protected override void Init()
     {
         base.Init();
+        skillEffects.Add(new Damage(10.0f));
 
         playerObject = this.gameObject;
         playerScript = playerObject.GetComponent<Player>();
@@ -46,7 +47,6 @@ public class Player : CharacterCommon
 
     private void Update()
     {
-        Debug.Log("Player Cur State: " + curState.ToString());
         if (curState == State.DEFAULT)
         {
             curState = State.RUN;

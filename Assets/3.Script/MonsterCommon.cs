@@ -19,7 +19,6 @@ public class MonsterCommon : CharacterCommon
     protected float speed = 2.0f;
     protected float attackRange = 1.0f;
     protected float damage;
-    protected List<SkillEffect> skillEffects;
 
     // states
     protected State state;
@@ -48,8 +47,6 @@ public class MonsterCommon : CharacterCommon
         hp = _hp;
         speed = _speed;
         attackRange = _attackRange;
-
-        skillEffects = new List<SkillEffect>();
     }
 
     protected virtual void Routine()
@@ -93,7 +90,7 @@ public class MonsterCommon : CharacterCommon
 
         foreach (Collider2D coll in colliders)
         {
-            if (coll.tag == "Player")
+            if (coll != null && coll.tag == "Player")
             {
                 player = coll.gameObject;
                 state = State.CHASING;
@@ -162,8 +159,4 @@ public class MonsterCommon : CharacterCommon
         else this.transform.rotation = leftFace;
     }
 
-    public List<SkillEffect> GetSkillEffects()
-    {
-        return skillEffects;
-    }
 }
