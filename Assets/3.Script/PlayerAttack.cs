@@ -73,8 +73,8 @@ public class PlayerAttack : MonoBehaviour
         {
             if (curState != State.DEFAULT)
             {
-                curState = State.DEFAULT;
                 isMoving = false;
+                curState = State.DEFAULT;
             }
         }
 
@@ -132,13 +132,22 @@ public class PlayerAttack : MonoBehaviour
     {
         if (IsAttackKey())
         {
+            AttackCancel();
             isRightFace = _isRightFace;
+            playerAttackAnimator.SetBool("hitFail", false);
             playerAttackAnimator.SetBool("isAttack1", true);
 
             IsMoveKey();
             return true;
         }
         return false;
+    }
+
+    public void AttackFail()
+    {
+        playerAttackAnimator.SetBool("hitFail", true);
+        isMoving = false;
+        curState = State.DEFAULT;
     }
 
     public void AttackCancel()

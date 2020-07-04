@@ -10,7 +10,6 @@ public class MonsterCommon : CharacterCommon
     // refers
     protected GameObject player;
     protected Vector3 targetPosition;
-    protected Rigidbody2D rigid;
     protected Animator animator;
     protected Collider2D searchRange;
 
@@ -39,7 +38,6 @@ public class MonsterCommon : CharacterCommon
 
         searchRange = this.gameObject.transform.Find("SearchRange").GetComponent<Collider2D>();
         animator = this.gameObject.transform.Find("Graphics").GetComponent<Animator>();
-        rigid = this.gameObject.GetComponent<Rigidbody2D>();
     }
 
     protected virtual void Property(string _monsterName, float _hp, float _speed, float _attackRange)

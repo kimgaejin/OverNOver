@@ -7,7 +7,6 @@ using UnityEngine;
 public class Player : CharacterCommon
 {
     private Player playerScript;
-    private GameObject playerObject;
     private PlayerMovement playerMovement;
     private PlayerAttack playerAttack;
     private Health playerHealth;
@@ -30,20 +29,20 @@ public class Player : CharacterCommon
     {
         base.Init();
         skillEffects.Add(new Damage(10.0f, false));
-        skillEffects.Add(new KnockBack(this.gameObject, 1.0f));
+        skillEffects.Add(new KnockBack(thisObject, 2.0f));
 
-        playerObject = this.gameObject;
-        playerScript = playerObject.GetComponent<Player>();
-        playerMovement = playerObject.GetComponent<PlayerMovement>();
-        playerAttack = playerObject.GetComponent<PlayerAttack>();
-        playerHealth = playerObject.GetComponent<Health>();
+        thisObject = this.gameObject;
+        playerScript = thisObject.GetComponent<Player>();
+        playerMovement = thisObject.GetComponent<PlayerMovement>();
+        playerAttack = thisObject.GetComponent<PlayerAttack>();
+        playerHealth = thisObject.GetComponent<Health>();
 
         leftFace.eulerAngles = new Vector3(0, -180, 0);
         rightFace.eulerAngles = new Vector3(0, 0, 0);
 
         playerMovement.Init();
         playerAttack.Init();
-        playerHealth.Init(playerObject, 100, "BodyGraphics", new string[] { "enemyAttack" });
+        playerHealth.Init(thisObject, 100, "BodyGraphics", new string[] { "enemyAttack" });
     }
 
     private void Update()
@@ -73,16 +72,25 @@ public class Player : CharacterCommon
         }
         else if (curState == State.ATTACKED)
         {
-
+            curState = State.RUN;
         }
 
         curTimer += Time.deltaTime;
     }
 
+    public override void Interrupt(string name)
+    {
+        if (name == "damaged")
+        {
+            curState = State.ATTACKED;
+            playerAttack.AttackFail();
+        }
+    }
+
     public void FlipToRight(bool isFaceRight)
     {
-        if (isFaceRight == true) playerObject.transform.rotation = rightFace;
-        else playerObject.transform.rotation = leftFace;
+        if (isFaceRight == true) thisObject.transform.rotation = rightFace;
+        else thisObject.transform.rotation = leftFace;
     }
 
     public float GetTimer()

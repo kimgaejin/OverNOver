@@ -72,6 +72,7 @@ public class Health : MonoBehaviour
         else
             StartCoroutine(CDamaged(1));
 
+        characterCommon.Interrupt("damaged");
         if (hp <= 0) characterCommon.Dead();
     }
 
