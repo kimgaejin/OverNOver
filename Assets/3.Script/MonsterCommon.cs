@@ -37,7 +37,7 @@ public class MonsterCommon : CharacterCommon
         rightFace = Quaternion.Euler(0, 0, 0);
         leftFace = Quaternion.Euler(0, -180, 0);
 
-        Transform jumpGround = thisObject.transform.Find("jumpGround");
+        jumpGround = thisObject.transform.Find("jumpGround");
         searchRange = this.gameObject.transform.Find("SearchRange").GetComponent<Collider2D>();
         animator = this.gameObject.transform.Find("Graphics").GetComponent<Animator>();
     }
