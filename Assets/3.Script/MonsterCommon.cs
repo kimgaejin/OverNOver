@@ -12,6 +12,7 @@ public class MonsterCommon : CharacterCommon
     protected Vector3 targetPosition;
     protected Animator animator;
     protected Collider2D searchRange;
+    protected Transform jumpGround;
 
     // property
     protected string monsterName;
@@ -36,6 +37,7 @@ public class MonsterCommon : CharacterCommon
         rightFace = Quaternion.Euler(0, 0, 0);
         leftFace = Quaternion.Euler(0, -180, 0);
 
+        Transform jumpGround = thisObject.transform.Find("jumpGround");
         searchRange = this.gameObject.transform.Find("SearchRange").GetComponent<Collider2D>();
         animator = this.gameObject.transform.Find("Graphics").GetComponent<Animator>();
     }
@@ -80,7 +82,6 @@ public class MonsterCommon : CharacterCommon
             {
                 state = State.CHASING;
                 animator.SetBool("attackFail", false);
-
             }
         }
         else if (state == State.DEAD)
@@ -186,7 +187,12 @@ public class MonsterCommon : CharacterCommon
 
     public override void Dead()
     {
+        if (state == State.DEAD) return;
+
         state = State.DEAD;
-        thisObject.layer = 11;// LayerMask.GetMask("groundEffect");
+        thisObject.layer = LayerMask.NameToLayer("groundEffect");
+        animator.SetTrigger("dead");
+
+        if (jumpGround) jumpGround.gameObject.SetActive(false);
     }
 }
