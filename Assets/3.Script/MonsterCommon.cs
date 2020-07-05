@@ -187,5 +187,6 @@ public class MonsterCommon : CharacterCommon
     public override void Dead()
     {
         state = State.DEAD;
+        thisObject.layer = 11;// LayerMask.GetMask("groundEffect");
     }
 }
