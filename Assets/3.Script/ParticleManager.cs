@@ -6,13 +6,16 @@ public class ParticleManager : MonoBehaviour
 {
     private List<Particle> particles;
 
+    public Sprite SPRITE_BLOOD;
+    public Sprite SPRITE_BONE;
+
     private void Awake()
     {
         particles = new List<Particle>();
         foreach (Transform tran in this.transform)
         {
             Particle particle = tran.gameObject.AddComponent<Particle>();
-            particle.Init(tran);
+            particle.Init(tran, Particle.SpriteType.BONE, SPRITE_BONE);
             particles.Add(particle);
             
         }
@@ -24,7 +27,7 @@ public class ParticleManager : MonoBehaviour
         {
             foreach (Particle particle in particles)
             {
-                if (particle.use == false)
+                if (particle.Condition(Particle.SpriteType.BONE))
                 {
                     particle.Effusion(Vector3.zero);
                     break;

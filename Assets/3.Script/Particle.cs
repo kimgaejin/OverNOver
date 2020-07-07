@@ -6,13 +6,28 @@ public class Particle : MonoBehaviour
 {
     public bool use;
     public Transform trans;
-    public Sprite sprite;
+    public enum SpriteType { DEFAULT, BLOOD, BONE };
+    public SpriteType spriteType;
 
-    public void Init (Transform trans)
+    public void Init (Transform trans, SpriteType sprType ,Sprite _spr)
     {
         this.trans = trans;
         use = false;
+        spriteType = sprType;
+
+        foreach (Transform tran in trans)
+        {
+            SpriteRenderer spr = tran.GetComponent<SpriteRenderer>();
+            spr.sprite = _spr;
+        }
+
         trans.gameObject.SetActive(false);
+    }
+
+    public bool Condition(SpriteType sprType)
+    {
+        if (spriteType == sprType && use == false) return true;
+        return false;
     }
 
     public void Effusion(Vector3 pos)
