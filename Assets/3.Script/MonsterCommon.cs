@@ -96,6 +96,7 @@ public class MonsterCommon : CharacterCommon
         if (name == "damaged")
         {
             AttackFail();
+            AttackedEffect();
         }
     }
 

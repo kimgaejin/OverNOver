@@ -41,4 +41,9 @@ public class SkullWarrior : MonsterCommon
             rigid.AddForce(distance * speed * 1, ForceMode2D.Impulse);
         }
     }
+
+    protected override void AttackedEffect()
+    {
+        ParticleManager.Instance.Show(Particle.SpriteType.BONE, transform.position) ;
+    }
 }

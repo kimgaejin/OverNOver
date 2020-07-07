@@ -20,6 +20,11 @@ public class CharacterCommon : MonoBehaviour
         skillEffects = new List<SkillEffect>();
     }
 
+    protected virtual void AttackedEffect()
+    {
+
+    }
+
     public virtual void Dead()
     {
 
