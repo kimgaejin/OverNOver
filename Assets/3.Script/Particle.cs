@@ -42,7 +42,7 @@ public class Particle : MonoBehaviour
 
             Vector2 arrow = Vector2.zero;
             arrow.x = 1.5f - (Random.value * 3);
-            arrow.y = 3 + (int)(Random.value * 3);
+            arrow.y = 3 + Random.value;
             Rigidbody2D rigid = tran.GetComponent<Rigidbody2D>();
             rigid.velocity = Vector2.zero;
             rigid.AddForce(arrow, ForceMode2D.Impulse);

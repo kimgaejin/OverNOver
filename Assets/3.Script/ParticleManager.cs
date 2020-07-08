@@ -8,6 +8,9 @@ public class ParticleManager : MonoBehaviour
     private static ParticleManager instance;
     private List<Particle> particles;
 
+    public GameObject particlePrefab;
+    public Sprite SPRITE_BLOOD;
+    public Sprite SPRITE_BONE;
 
     public static ParticleManager Instance
     {
@@ -24,7 +27,7 @@ public class ParticleManager : MonoBehaviour
 
                 else
                 {
-                    var newSingleton = new GameObject("Particles").AddComponent<ParticleManager>();
+                    var newSingleton = new GameObject("ParticleManager").AddComponent<ParticleManager>();
                     instance = newSingleton;
                 }
 
@@ -33,31 +36,42 @@ public class ParticleManager : MonoBehaviour
         }
     }
 
-    public Sprite SPRITE_BLOOD;
-    public Sprite SPRITE_BONE;
 
     private void Awake()
     {
         particles = new List<Particle>();
-        foreach (Transform tran in this.transform)
-        {
-            Particle particle = tran.gameObject.AddComponent<Particle>();
-            particle.Init(tran, Particle.SpriteType.BONE, SPRITE_BONE);
-            particles.Add(particle);
+        NewParticle(Particle.SpriteType.BONE, SPRITE_BONE);
+        NewParticle(Particle.SpriteType.BONE, SPRITE_BONE);
+        NewParticle(Particle.SpriteType.BLOOD, SPRITE_BLOOD);
+        NewParticle(Particle.SpriteType.BLOOD, SPRITE_BLOOD);
+    }
 
-        }
+    private Particle NewParticle(Particle.SpriteType type, Sprite sprite)
+    {
+        GameObject ins = Instantiate(particlePrefab, transform);
+        Particle particle = ins.AddComponent<Particle>();
+        particle.Init(ins.transform, type, sprite);
+        particles.Add(particle);
+        return particle;
     }
     
 
     public void Show(Particle.SpriteType type, Vector3 pos)
     {
+        bool process = false;
         foreach (Particle particle in particles)
         {
             if (particle.Condition(type))
             {
                 particle.Effusion(pos);
+                process = true;
                 break;
             }
+        }
+
+        if (process == false)
+        {
+            NewParticle(Particle.SpriteType.BONE, SPRITE_BONE).Effusion(pos);
         }
     }
 }

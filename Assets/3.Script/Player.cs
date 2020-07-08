@@ -84,6 +84,7 @@ public class Player : CharacterCommon
         {
             curState = State.ATTACKED;
             playerAttack.AttackFail();
+            ParticleManager.Instance.Show(Particle.SpriteType.BLOOD, transform.position);
         }
     }
 
