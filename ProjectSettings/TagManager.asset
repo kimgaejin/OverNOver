@@ -62,6 +62,12 @@ TagManager:
   - name: PlayerSword
     uniqueID: 3488593371
     locked: 0
-  - name: PlayerEffects
+  - name: PlayerEffects1
     uniqueID: 3517247817
+    locked: 0
+  - name: PlayerEffects2
+    uniqueID: 873048521
+    locked: 0
+  - name: PlayerEffects3
+    uniqueID: 2272639501
     locked: 0

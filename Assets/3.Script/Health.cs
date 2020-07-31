@@ -40,18 +40,32 @@ public class Health : MonoBehaviour
         {
             if (!isDamaged)
             {
-                // 군중제어
-                Transform characterTransform = collision.transform;
-                CharacterCommon chara = characterTransform.GetComponent<CharacterCommon>();
+                List<SkillEffect> skills;
 
-                while (chara == null && characterTransform.parent != null)
+                if (collision.GetComponent<SkillObject>())
                 {
-                    characterTransform = characterTransform.parent;
-                    chara = characterTransform.GetComponent<CharacterCommon>();
+                    // 충돌체가 스킬 인 경우
+                    SkillObject skillObject = collision.GetComponent<SkillObject>();
+                    skills = skillObject.GetSkillEffects();
                 }
-                if (chara == null) return;
+                else
+                {
+                    // 충돌체가 적 오브젝트에 부속된 경우
+                    Transform characterTransform = collision.transform;
+                    CharacterCommon chara = characterTransform.GetComponent<CharacterCommon>();
 
-                List<SkillEffect> skills = chara.GetSkillEffects();
+                    while (chara == null && characterTransform.parent != null)
+                    {
+                        // CharacterCommon 스크립트의 SkllEffect를 찾기 위해 계속 부모를 참조한다.
+                        characterTransform = characterTransform.parent;
+                        chara = characterTransform.GetComponent<CharacterCommon>();
+                    }
+                    if (chara == null) return;
+
+                    skills = chara.GetSkillEffects();
+                }
+                
+                // 찾은 SkillEffect의 효과들을 적용한다.
                 foreach (SkillEffect skill in skills)
                 {
                     skill.Do(this.gameObject);
