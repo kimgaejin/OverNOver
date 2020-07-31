@@ -9,6 +9,8 @@ public class Particle : MonoBehaviour
     public enum SpriteType { DEFAULT, BLOOD, BONE };
     public SpriteType spriteType;
 
+    private Quaternion rotQuat;
+
     public void Init (Transform trans, SpriteType sprType ,Sprite _spr)
     {
         this.trans = trans;
@@ -21,6 +23,7 @@ public class Particle : MonoBehaviour
             spr.sprite = _spr;
         }
 
+        rotQuat.eulerAngles = new Vector3(0, 0, 135);
         trans.gameObject.SetActive(false);
     }
 
@@ -42,10 +45,11 @@ public class Particle : MonoBehaviour
 
             Vector2 arrow = Vector2.zero;
             arrow.x = 1.5f - (Random.value * 3);
-            arrow.y = 3 + Random.value;
+            arrow.y = 4 + Random.value;
             Rigidbody2D rigid = tran.GetComponent<Rigidbody2D>();
             rigid.velocity = Vector2.zero;
             rigid.AddForce(arrow, ForceMode2D.Impulse);
+            rigid.AddTorque(10 + (Random.value * 20));
         }
 
         StartCoroutine(ExitParticle(3.0f));
