@@ -4,26 +4,20 @@ using UnityEngine;
 
 public class GroundChecker : MonoBehaviour
 {
-    private bool isGround;
-
-    private void OnTriggerEnter2D(Collider2D collsion)
-    {
-        if (collsion.tag == "ground")
-        {
-            isGround = true;
-        }
-    }
-
-    private void Update()
-    {
-        if (!isGround)
-        {
-            this.transform.position += Vector3.down * Time.deltaTime;
-        }
-    }
-
     public bool IsGround()
     {
-        return isGround;
+        CircleCollider2D coll = this.GetComponent<CircleCollider2D>();
+        ContactFilter2D contactFilter = new ContactFilter2D();
+        List<Collider2D> colls= new List<Collider2D>();
+        coll.OverlapCollider(contactFilter, colls);
+
+        foreach (Collider2D target in colls)
+        {
+            if (target.tag == "ground")
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

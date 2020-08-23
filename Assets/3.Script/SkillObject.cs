@@ -22,4 +22,9 @@ public class SkillObject : MonoBehaviour
     {
         return skillEffects;
     }
+
+    public void SetActive(bool value)
+    {
+        this.gameObject.SetActive(value);
+    }
 }

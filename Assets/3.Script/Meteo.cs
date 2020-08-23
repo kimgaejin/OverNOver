@@ -11,15 +11,14 @@ public class Meteo : SkillObject
     private void Start()
     {
         Init();
-        
     }
 
     protected override void Init()
     {
         base.Init();
 
-        skillEffects.Add(new Damage(10.0f, false));
-        skillEffects.Add(new KnockBack(this.gameObject, 2.0f));
+        skillEffects.Add(new Damage(20.0f, false));
+        skillEffects.Add(new KnockBack(this.gameObject, 8.0f));
 
         groundChecker = transform.Find("GroundChecker").GetComponent<GroundChecker>();
         bullet = transform.Find("Graphics").Find("Bullet").gameObject;
@@ -42,8 +41,8 @@ public class Meteo : SkillObject
         {
             if (groundChecker.IsGround() == true)
             {
-                bullet.transform.position = target.transform.position += new Vector3(10, 10, 0);
                 bullet.SetActive(true);
+                bullet.transform.position = groundChecker.transform.position += new Vector3(10, 10, 0);
                 state = State.SPELL;
             }
             else
@@ -53,7 +52,12 @@ public class Meteo : SkillObject
         }
         else if (state == State.SPELL)
         {
-
+            bullet.transform.position += new Vector3(-3, -3, 0) * Time.deltaTime;
+            groundChecker.transform.position = bullet.transform.position;
+            if (groundChecker.IsGround() == true)
+            {
+                SetActive(false);
+            }
         }
     }
 }
